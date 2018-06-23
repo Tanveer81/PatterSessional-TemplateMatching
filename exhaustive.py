@@ -4,7 +4,8 @@ import math
 import time
 import cv2
 from matplotlib import pyplot as plt
-
+import matplotlib.patches as patches
+from PIL import Image
 
 def main():
     ref = cv2.imread('ref.PNG', cv2.IMREAD_GRAYSCALE)
@@ -15,33 +16,59 @@ def main():
     plt.plot(), plt.imshow(test, 'gray'), plt.title('ORIGINAL')
     plt.show()
 
-    refx, refy = ref.shape
+    ref_x, ref_y = ref.shape
     testx, testy = test.shape
 
-    print(refx)
-    print(refy)
+    print("Reference Image Dimension")
+    print(ref_x)
+    print(ref_y)
+    print("Test Image Dimension")
     print(testx)
     print(testy)
 
     lowest = float('inf')
-    print(lowest)
+    # print(lowest)
     start = time.clock()
-    for i in range(0, testx - refx + 1):
-        for j in range(0, testy - refy + 1):
-            test_interval = test[i:i + refx, j:j + refy]
+    limit_x = testx - ref_x + 1
+    limit_y = testy - ref_y + 1
+    for i in range(0, limit_x):
+        for j in range(0, limit_y):
+            end_x = i + ref_x
+            end_y = j + ref_y
+            test_interval = test[i:end_x, j:end_y]
             diff = test_interval - ref
             # print(diff)
             diff_sqr = np.sum(diff * diff)
             # print(diff_sqr)
-            if diff_sqr < lowest:
+            if lowest > diff_sqr:
                 lowest = diff_sqr
-                best = j, i
+                best_x = i
+                best_y = j
     end = time.clock()
     total_time = end - start
     print("Total Time ")
     print(total_time)
-    print(best)
+    
+    print("Printing My Result ")
+    print(best_x)
+    print(best_y)
     print(lowest)
+
+    # test = cv2.imread('test.PNG', cv2.IMREAD_GRAYSCALE)
+    # plt.plot(), plt.imshow(test, 'gray'), plt.title('ORIGINAL')
+    # plt.plot(i, j, 'o')
+    # plt.show()
+
+    im = np.array(Image.open('sea.bmp'), dtype=np.uint8)
+    # Create figure and axes
+    fig, ax = plt.subplots(1)
+    # Display the image
+    ax.imshow(im)
+    # Create a Rectangle patch
+    rect = patches.Rectangle((best_y, best_x), ref_y, ref_x, linewidth=3, edgecolor='r', facecolor='none')
+    # Add the patch to the Axes
+    ax.add_patch(rect)
+    plt.show()
 
     res = cv2.matchTemplate(test, ref, cv2.TM_SQDIFF)
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
