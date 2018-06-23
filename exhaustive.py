@@ -1,35 +1,36 @@
 import numpy as np
-import random
-import math
 import time
 import cv2
 from matplotlib import pyplot as plt
 import matplotlib.patches as patches
 from PIL import Image
 
+test_image = 'fb.jpg'
+ref_image = 'fb_ref.BMP'
+
 def main():
-    ref = cv2.imread('ref.PNG', cv2.IMREAD_GRAYSCALE)
+    ref = cv2.imread(ref_image, cv2.IMREAD_GRAYSCALE)
     plt.plot(), plt.imshow(ref, 'gray'), plt.title('ORIGINAL')
     plt.show()
 
-    test = cv2.imread('test.PNG', cv2.IMREAD_GRAYSCALE)
+    test = cv2.imread(test_image, cv2.IMREAD_GRAYSCALE)
     plt.plot(), plt.imshow(test, 'gray'), plt.title('ORIGINAL')
     plt.show()
 
     ref_x, ref_y = ref.shape
-    testx, testy = test.shape
+    test_x, testy = test.shape
 
     print("Reference Image Dimension")
     print(ref_x)
     print(ref_y)
     print("Test Image Dimension")
-    print(testx)
+    print(test_x)
     print(testy)
 
     lowest = float('inf')
     # print(lowest)
     start = time.clock()
-    limit_x = testx - ref_x + 1
+    limit_x = test_x - ref_x + 1
     limit_y = testy - ref_y + 1
     for i in range(0, limit_x):
         for j in range(0, limit_y):
@@ -59,7 +60,7 @@ def main():
     # plt.plot(i, j, 'o')
     # plt.show()
 
-    im = np.array(Image.open('sea.bmp'), dtype=np.uint8)
+    im = np.array(Image.open(test_image), dtype=np.uint8)
     # Create figure and axes
     fig, ax = plt.subplots(1)
     # Display the image

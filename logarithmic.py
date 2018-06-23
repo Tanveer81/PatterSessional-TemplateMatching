@@ -1,5 +1,4 @@
 import numpy as np
-import random
 import math
 import time
 import cv2
@@ -7,13 +6,15 @@ from matplotlib import pyplot as plt
 import matplotlib.patches as patches
 from PIL import Image
 
+test_image = 'fb.jpg'
+ref_image = 'fb_ref.BMP'
 
 def main():
-    ref = cv2.imread('ref.BMP', cv2.IMREAD_GRAYSCALE)
+    ref = cv2.imread(ref_image, cv2.IMREAD_GRAYSCALE)
     plt.plot(), plt.imshow(ref, 'gray'), plt.title('ORIGINAL')
     plt.show()
 
-    test = cv2.imread('sea.BMP', cv2.IMREAD_GRAYSCALE)
+    test = cv2.imread(test_image, cv2.IMREAD_GRAYSCALE)
     plt.plot(), plt.imshow(test, 'gray'), plt.title('ORIGINAL')
     plt.show()
 
@@ -94,7 +95,7 @@ def main():
     # plt.plot(best_y, best_x, 'o')
     # plt.show()
 
-    im = np.array(Image.open('sea.bmp'), dtype=np.uint8)
+    im = np.array(Image.open(test_image), dtype=np.uint8)
     # Create figure and axes
     fig, ax = plt.subplots(1)
     # Display the image
