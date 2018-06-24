@@ -71,6 +71,7 @@ def main():
     ax.add_patch(rect)
     plt.show()
 
+    print("Printing open-cv result")
     res = cv2.matchTemplate(test, ref, cv2.TM_SQDIFF)
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
     print(min_loc)

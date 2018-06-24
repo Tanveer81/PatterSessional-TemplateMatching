@@ -2,25 +2,16 @@ import numpy as np
 import random
 import math
 import time
-import cv2
+import cv2 as cv
 from matplotlib import pyplot as plt
+from PIL import Image
 
 
 def main():
-    list = [(0,0)]
+    a = [(0, 0), (0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    lst = np.add(a, [(1, 1)])
 
-    neighbour_x = 1
-    neighbour_y = 2
-    neighbour = (neighbour_x, neighbour_y)
-    list.append(neighbour)
-
-    neighbour_x = 3
-    neighbour_y = 4
-    neighbour = (neighbour_x, neighbour_y)
-    list.append(neighbour)
-
-    for a in list:
-        print(a)
+    print(lst)
 
 
 if __name__ == "__main__":

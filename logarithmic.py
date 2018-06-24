@@ -48,7 +48,7 @@ def main():
     best_x = 0
     best_y = 0
     while dx >= 1.0 and dy >= 1.0:
-        lst = [best]
+        lst = []
         for i in a:
             for j in a:
                 neighbour_x = center_x + i * dx
